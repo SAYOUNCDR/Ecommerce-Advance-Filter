@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
 
-const Input = () => {
+const Input = ({ handleChange, value, title, name, color }) => {
   return (
-    <div>Input</div>
-  )
-}
+    <label className="sidebar-label-container">
+      <input type="radio" name="test2" />
+      <span className="checkmark"></span>All
+    </label>
+  );
+};
 
-export default Input
+export default Input;
