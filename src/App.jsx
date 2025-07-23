@@ -5,6 +5,7 @@ import Recommended from "./Recommended/Recommended";
 import Sidebar from "./Sidebar/Sidebar";
 import products from "./db/data";
 import Card from "./components/Card";
+import React from "react";
 import "./index.css";
 const App = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -51,7 +52,10 @@ const App = () => {
     }
 
     return filteredProducts.map(
-      ({ img, title, star, reviews, prevPrice, newPrice, company, color }, index) => (
+      (
+        { img, title, star, reviews, prevPrice, newPrice, company, color },
+        index
+      ) => (
         <Card
           key={`${title}-${company}-${color}-${newPrice}`}
           img={img}
