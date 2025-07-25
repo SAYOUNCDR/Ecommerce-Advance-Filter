@@ -1,0 +1,116 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 280px; /* Fixed width for all cards */
+  height: 400px; /* Fixed height for all cards */
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: white;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card-img {
+  width: 100%;
+  height: 200px; /* Fixed height for images */
+  object-fit: contain; /* Shows full image without cropping */
+  object-position: center;
+  background-color: #f8f9fa; /* Light background for images with transparency or different aspect ratios */
+}
+
+.card-details {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  height: 200px; /* Fixed height for details section */
+  justify-content: space-between;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+  height: 44px; /* Fixed height for title (2 lines max) */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.card-reviews {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.total-reviews {
+  color: #666;
+  font-size: 12px;
+}
+
+.card-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto; /* Pushes price section to bottom */
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.price del {
+  color: #999;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.bag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background-color: #f8f9fa;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.bag:hover {
+  background-color: #e9ecef;
+}
+
+.bag-icon {
+  font-size: 18px;
+  color: #666;
+}
+
+/* Container for cards (optional - if you want to display cards in a grid) */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Alternative flexbox container */
+.cards-flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}

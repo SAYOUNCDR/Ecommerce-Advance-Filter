@@ -1,17 +1,19 @@
 import { useState } from "react";
+
 import Navigation from "./Navigation/Nav";
 import Products from "./Products/Products";
+import products from "./db/data";
 import Recommended from "./Recommended/Recommended";
 import Sidebar from "./Sidebar/Sidebar";
-import products from "./db/data";
 import Card from "./components/Card";
-import React from "react";
 import "./index.css";
-const App = () => {
+
+function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [query, setQuery] = useState("");
 
   // ----------- Input Filter -----------
+  const [query, setQuery] = useState("");
+
   const handleInputChange = (event) => {
     setQuery(event.target.value);
   };
@@ -30,7 +32,6 @@ const App = () => {
     setSelectedCategory(event.target.value);
   };
 
-  // -----------------------------------------
   function filteredData(products, selected, query) {
     let filteredProducts = products;
 
@@ -52,12 +53,9 @@ const App = () => {
     }
 
     return filteredProducts.map(
-      (
-        { img, title, star, reviews, prevPrice, newPrice, company, color },
-        index
-      ) => (
+      ({ img, title, star, reviews, prevPrice, newPrice }) => (
         <Card
-          key={`${title}-${company}-${color}-${newPrice}`}
+          key={Math.random()}
           img={img}
           title={title}
           star={star}
@@ -68,6 +66,7 @@ const App = () => {
       )
     );
   }
+
   const result = filteredData(products, selectedCategory, query);
 
   return (
@@ -78,6 +77,6 @@ const App = () => {
       <Products result={result} />
     </>
   );
-};
+}
 
 export default App;

@@ -1,15 +1,16 @@
-import Input from "../../components/Input";
 import "./Category.css";
-const Category = (handleChange) => {
+import Input from "../../components/Input";
+
+function Category({ handleChange }) {
   return (
     <div>
       <h2 className="sidebar-title">Category</h2>
+
       <div>
         <label className="sidebar-label-container">
-          <input type="radio" onChange={handleChange} value="" name="test" />
+          <input onChange={handleChange} type="radio" value="" name="test" />
           <span className="checkmark"></span>All
         </label>
-
         <Input
           handleChange={handleChange}
           value="sneakers"
@@ -30,13 +31,13 @@ const Category = (handleChange) => {
         />
         <Input
           handleChange={handleChange}
-          value="hells"
-          title="Hells"
+          value="heels"
+          title="Heels"
           name="test"
         />
       </div>
     </div>
   );
-};
+}
 
 export default Category;
