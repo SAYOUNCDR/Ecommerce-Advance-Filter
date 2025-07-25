@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import Navigation from "./Navigation/Nav";
 import Products from "./Products/Products";
 import products from "./db/data";
@@ -10,17 +9,12 @@ import "./index.css";
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
-
-  // ----------- Input Filter -----------
   const [query, setQuery] = useState("");
 
+  // ----------- Input Filter -----------
   const handleInputChange = (event) => {
     setQuery(event.target.value);
   };
-
-  const filteredItems = products.filter(
-    (product) => product.title.toLowerCase().indexOf(query.toLowerCase()) !== -1
-  );
 
   // ----------- Radio Filtering -----------
   const handleChange = (event) => {
@@ -32,42 +26,52 @@ function App() {
     setSelectedCategory(event.target.value);
   };
 
-  function filteredData(products, selected, query) {
+  // ------------ Improved Filtering Logic -----------
+  function getFilteredProducts() {
     let filteredProducts = products;
 
-    // Filtering Input Items
-    if (query) {
-      filteredProducts = filteredItems;
-    }
-
-    // Applying selected filter
-    if (selected) {
-      filteredProducts = filteredProducts.filter(
-        ({ category, color, company, newPrice, title }) =>
-          category === selected ||
-          color === selected ||
-          company === selected ||
-          newPrice === selected ||
-          title === selected
+    // Apply search query filter
+    if (query.trim()) {
+      filteredProducts = filteredProducts.filter((product) =>
+        product.title.toLowerCase().includes(query.toLowerCase().trim())
       );
     }
 
-    return filteredProducts.map(
-      ({ img, title, star, reviews, prevPrice, newPrice }) => (
-        <Card
-          key={Math.random()}
-          img={img}
-          title={title}
-          star={star}
-          reviews={reviews}
-          prevPrice={prevPrice}
-          newPrice={newPrice}
-        />
-      )
-    );
+    // Apply category filter
+    if (selectedCategory) {
+      filteredProducts = filteredProducts.filter((product) => {
+        const { category, color, company, newPrice } = product;
+
+        return (
+          category === selectedCategory ||
+          color === selectedCategory ||
+          company === selectedCategory ||
+          newPrice === selectedCategory
+        );
+      });
+    }
+
+    return filteredProducts;
   }
 
-  const result = filteredData(products, selectedCategory, query);
+  // ------------ Render Filtered Products -----------
+  function renderProducts() {
+    const filteredProducts = getFilteredProducts();
+
+    return filteredProducts.map((product, index) => (
+      <Card
+        key={`${product.title}-${product.company}-${index}`} // More stable key
+        img={product.img}
+        title={product.title}
+        star={product.star}
+        reviews={product.reviews}
+        prevPrice={product.prevPrice}
+        newPrice={product.newPrice}
+      />
+    ));
+  }
+
+  const result = renderProducts();
 
   return (
     <>
